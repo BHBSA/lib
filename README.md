@@ -3,15 +3,15 @@
 How to use?
 see <a href='http://192.168.0.27/DataProduct/lib/wikis/How-to-use%3F'>WIKI</a>
 
-`布隆过滤器`
+布隆过滤器
 
-`若快验证码人工打码`
+若快验证码人工打码
 
-`城市名称拼音转换`
+城市名称拼音转换
 
-`Mongo`
+Mongo
 
-`Rabbitmq`
+Rabbitmq
 
-`LOGGER`
+LOGGER
 
