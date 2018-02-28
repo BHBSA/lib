@@ -1,14 +1,22 @@
 import pika
 
-connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
-channel = connection.channel()
-
 
 class Rabbit:
-    def __init__(self, host):
-        self.host = host
+    def __init__(self, host, port):
+        self.connection = pika.BlockingConnection(pika.ConnectionParameters(host, port))
 
-    def get_rabbit(self):
-        # todo
-        connection = pika.BlockingConnection(pika.ConnectionParameters(self.host))
-        return connection
+    def get_connection(self):
+        return self.connection
+
+    def get_channel(self):
+        return self.connection.channel()
+
+
+if __name__ == '__main__':
+    r = Rabbit('192.168.0.190', 5673)
+    channel = r.get_channel()
+    channel.queue_declare(queue='hello')
+    channel.basic_publish(exchange='',
+                          routing_key='hello',
+                          body='Hello World!')
+    print(" [x] Sent 'Hello World!'")
