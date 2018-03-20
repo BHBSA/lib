@@ -2,7 +2,7 @@ from pymongo import MongoClient
 
 
 class Mongo:
-    def __init__(self, host, port, db_name, collection_name):
+    def __init__(self, host, port, db_name=None, collection_name=None):
         """
 
         :param host:
@@ -20,6 +20,9 @@ class Mongo:
         db = client[self.db]
         collection = db[self.collection_name]
         return collection
+
+    def get_connection(self):
+        return MongoClient(self.host, self.port)
 
 
 if __name__ == '__main__':
