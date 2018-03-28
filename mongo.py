@@ -13,7 +13,7 @@ class Singleton(type):
 
 class Mongo(metaclass=Singleton):
 
-    def __init__(self, host, port, db_name=None, collection_name=None):
+    def __init__(self, host, port=27017, db_name=None, collection_name=None):
         """
         :param host:
         :param port:
