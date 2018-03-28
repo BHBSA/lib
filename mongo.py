@@ -24,7 +24,7 @@ class Mongo(metaclass=Singleton):
         self.port = int(port)
         self.db = db_name
         self.collection_name = collection_name
-        self.collection = MongoClient(self.host, self.port)
+        self.connect = MongoClient(self.host, self.port)
 
     def get_collection_object(self):
         warnings.warn('这个方法我早晚给它删了的,你们都别用,请直接调用类属性',
