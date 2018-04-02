@@ -37,7 +37,7 @@ class Mongo(metaclass=Singleton):
     def get_connection(self):
         warnings.warn('这个方法我早晚给它删了的,这个虽然是单例，你们都别用,请直接调用类属性',
                       DeprecationWarning, stacklevel=2)
-        return self.collection
+        return self.connect
 
 
 if __name__ == '__main__':
