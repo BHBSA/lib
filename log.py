@@ -1,9 +1,16 @@
-import logging
+import logging.config
 
-logger = logging.getLogger('MQ')
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-# logger.info("Start print log")
-# logger.debug("Do something")
-# logger.warning("Something maybe fail.")
-# logger.info("Finish")
+logging.config.fileConfig('log_config')
+# create logger
+logger = logging.getLogger('simpleExample')
+
+# 'application' code
+logger.debug('debug message')
+logger.info('info message')
+logger.warning('warn message')
+logger.error('error message')
+logger.critical('critical message')
+
+
+
