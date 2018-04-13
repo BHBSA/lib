@@ -12,7 +12,7 @@ class Rabbit:
     def connect_rabbit(host, port):
         try:
             print('建立pika连接')
-            connection = pika.BlockingConnection(pika.ConnectionParameters(host, port))
+            connection = pika.BlockingConnection(pika.ConnectionParameters(host=host, port=port, heartbeat_interval=0))
             return connection
         except Exception as e:
             print('重新连接pika')
