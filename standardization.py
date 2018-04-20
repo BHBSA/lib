@@ -18,7 +18,8 @@ def standard_city(city_name):
     """
     for i in standard_city_dict.items():
         for city in i[1]:
-            if city in city_name:
+            if city and i[0] in city_name:
+                print(i[0])
                 return i[0]
             else:
                 continue
@@ -40,8 +41,10 @@ def standard_block(region_name):
             else:
                 continue
     print('无法标准化')
+    # print(region_name)
     return region_name
 
 
 if __name__ == '__main__':
     standard_city('   珠海市  ')
+
