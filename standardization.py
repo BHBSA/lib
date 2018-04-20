@@ -4,9 +4,9 @@
 
 import json
 
-with open('city.json', 'r+') as f:
+with open('lib/city.json', 'r+') as f:
     standard_city_dict = json.loads(f.read())
-with open('region.json', 'r+') as f:
+with open('lib/region.json', 'r+') as f:
     standard_block_dict = json.loads(f.read())
 
 
