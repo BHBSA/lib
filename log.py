@@ -39,6 +39,10 @@ class LogHandler(logging.Logger):
         :param level:
         :return:
         """
+        isExists = os.path.exists(LOG_PATH)
+        if not isExists:
+            os.makedirs(LOG_PATH)
+
         file_name = os.path.join(LOG_PATH, '{name}.log'.format(name=self.name))
         # print(file_name)
         # 设置日志回滚, 保存在log目录, 一天保存一个文件, 保留15天
