@@ -58,7 +58,7 @@ class BloomFilter:
 if __name__ == '__main__':
     bf = BloomFilter()
     url = 'https://sy.anjuke.com/prop/view/A1048407752?from=comm_one-saleMetro&spread=commsearch_p&ab=expclick-AJKERSHOUFANG_101_sortrand_desc&position=13&kwtype=comm_one&now_time=151289161'
-    if bf.isContains(url):
+    if bf.is_contains(url):
         print('exists!')
     else:
         print('not exists!')
