@@ -15,7 +15,8 @@ DEBUG = 10
 NOTSET = 0
 
 CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
-LOG_PATH = os.path.join(CURRENT_PATH, 'log')
+ROOT_PATH = os.path.join(CURRENT_PATH, os.pardir)
+LOG_PATH = os.path.join(ROOT_PATH, 'log')
 
 
 class LogHandler(logging.Logger):
