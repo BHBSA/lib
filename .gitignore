@@ -6,3 +6,4 @@ gen
 *.pyc
 env
 test*
+*log*
