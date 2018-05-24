@@ -3,14 +3,14 @@
 """
 
 import json
-from lib.region_block import block_region
+from lib.region_block import region_block
 
 with open('lib/city.json', 'r+') as f:
     standard_city_dict = json.loads(f.read())
 # with open('region.json', 'r+') as f:
 #     standard_block_dict = json.loads(f.read())
 #     print(standard_block_dict)
-standard_block_dict  = block_region()
+standard_block_dict  = region_block()
 def standard_city(city_name):
     """
 
@@ -25,7 +25,7 @@ def standard_city(city_name):
             else:
                 continue
     print("无法标准化")
-    return city_name
+    return False
 
 
 def standard_block(city_name,region_name):
@@ -36,18 +36,20 @@ def standard_block(city_name,region_name):
     """
     city = standard_city(city_name)
     for i in standard_block_dict.items():
-        if city == i[1][0]:
-            for block in i[1][1]:
-                if block in region_name:
-                    print(i[0])
-                    return i[0]
+        if city == i[0]:
+            for block in i[1].items():
+                for n in block[1]:
+                    if n in region_name:
+                        # print(block[0])
+                        return block[0]
+
                 else:
                     continue
     print('无法标准化')
     # print(region_name)
-    return region_name
+    return False
 
 
 if __name__ == '__main__':
     # standard_city('   珠海市  ')
-    standard_block('上海','浦东惠南')
+    standard_block('北京','[朝阳]百子湾')
