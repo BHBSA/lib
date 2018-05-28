@@ -25,7 +25,7 @@ def standard_city(city_name):
                 return True, i[0]
             else:
                 continue
-    log.error("无法标准化{}".format(city_name))
+    log.error("城市无法标准化：{}".format(city_name))
     return False, city_name
 
 
@@ -43,7 +43,7 @@ def standard_block(city_name, region_name):
                 for n in block[1]:
                     if n in region_name:
                         return True, block[0]
-    log.error('无法标准化{}'.format(region_name))
+    log.error('区域无法标准化，城市：{}，区域：{}'.format(city_name, region_name))
     return False, region_name
 
 
