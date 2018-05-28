@@ -26,7 +26,6 @@ def standard_city(city_name):
     log.error("无法标准化{}".format(city_name))
     return False,city_name
 
-
 def standard_block(city_name,region_name):
     """
 
