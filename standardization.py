@@ -6,11 +6,13 @@ import json
 from lib.region_block import region_block
 from lib.log import LogHandler
 
-log = LogHandler('standard')
+log = LogHandler(__name__)
 with open('lib/city.json', 'r+') as f:
     standard_city_dict = json.loads(f.read())
 
-standard_block_dict  = region_block()
+standard_block_dict = region_block()
+
+
 def standard_city(city_name):
     """
 
@@ -20,15 +22,17 @@ def standard_city(city_name):
     for i in standard_city_dict.items():
         for city in i[1]:
             if city and i[0] in city_name:
-                return True,i[0]
+                return True, i[0]
             else:
                 continue
     log.error("无法标准化{}".format(city_name))
-    return False,city_name
+    return False, city_name
 
-def standard_block(city_name,region_name):
+
+def standard_block(city_name, region_name):
     """
 
+    :param city_name: 城市名称
     :param region_name: 区域
     :return: 区域
     """
@@ -38,14 +42,11 @@ def standard_block(city_name,region_name):
             for block in i[1].items():
                 for n in block[1]:
                     if n in region_name:
-                        return True,block[0]
-
-                else:
-                    continue
+                        return True, block[0]
     log.error('无法标准化{}'.format(region_name))
-    return False,region_name
+    return False, region_name
 
 
 if __name__ == '__main__':
     # standard_city('   珠海市  ')
-    standard_block('北京','[朝阳]百子湾')
+    standard_block('北京', '[朝阳]百子湾')
