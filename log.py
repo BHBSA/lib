@@ -1,7 +1,6 @@
 import os
-
 import logging
-
+import platform
 from logging.handlers import TimedRotatingFileHandler
 
 # 日志级别
@@ -14,16 +13,8 @@ INFO = 20
 DEBUG = 10
 NOTSET = 0
 
-CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
-ROOT_PATH = os.path.join(CURRENT_PATH, os.pardir)
-LOG_PATH = os.path.join(ROOT_PATH, 'log')
-
 
 class LogHandler(logging.Logger):
-    """
-    LogHandler
-    """
-
     def __init__(self, name, level=DEBUG, stream=True, file=True):
         self.name = name
         self.level = level
@@ -39,12 +30,20 @@ class LogHandler(logging.Logger):
         :param level:
         :return:
         """
-        isExists = os.path.exists(LOG_PATH)
-        if not isExists:
-            os.makedirs(LOG_PATH)
+        # 判断操作系统
+        if 'Windows' in platform.platform():
+            current_path = os.path.dirname(os.path.abspath(__file__))
+            root_path = os.path.join(current_path, os.pardir)
+            log_path = os.path.join(root_path, 'log')
+        else:
+            log_path = '/home/data/log/'
 
-        file_name = os.path.join(LOG_PATH, '{name}.log'.format(name=self.name))
-        # print(file_name)
+        is_exists = os.path.exists(log_path)
+        if not is_exists:
+            os.makedirs(log_path)
+
+        file_name = os.path.join(log_path, '{name}.log'.format(name=self.name))
+
         # 设置日志回滚, 保存在log目录, 一天保存一个文件, 保留15天
         file_handler = TimedRotatingFileHandler(filename=file_name, when='D', interval=1, backupCount=15)
         file_handler.suffix = '%Y%m%d.log'
@@ -73,7 +72,7 @@ class LogHandler(logging.Logger):
             stream_handler.setLevel(level)
         self.addHandler(stream_handler)
 
-    def resetName(self, name):
+    def reset_name(self, name):
         """
         reset name
         :param name:
