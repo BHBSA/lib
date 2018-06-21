@@ -6,16 +6,12 @@ import json
 # from lib.region_block import region_block
 # from lib.log import LogHandler
 
-from region_block import region_block
+from region_block import city_dict, region_dict
 from log import LogHandler
 
 log = LogHandler(__name__)
 # with open('lib/city.json', 'r+') as f:
 #     standard_city_dict = json.loads(f.read())
-with open('city.json', 'r+') as f:
-    standard_city_dict = json.loads(f.read())
-
-standard_block_dict = region_block()
 
 
 def standard_city(city_name):
@@ -24,10 +20,10 @@ def standard_city(city_name):
     :param city_name: 城市名称
     :return: 城市名称
     """
-    for i in standard_city_dict.items():
+    for i in city_dict.items():
         print(i)
         for k in i[1]:
-            if k in city_name or i[0] in city_name:
+            if k in city_name:
                 return True, i[0]
         # for city in i[1]:
         #     if city and i[0] in city_name:
@@ -44,7 +40,7 @@ def standard_block(city_name, region_name):
     :return: 区域
     """
     city = standard_city(city_name)[1]
-    for i in standard_block_dict.items():
+    for i in region_dict.items():
         if city == i[0]:
             for block in i[1].items():
                 for n in block[1]:
