@@ -13,7 +13,7 @@ class Singleton(type):
 
 class Mongo(metaclass=Singleton):
 
-    def __init__(self, host, port=27017, db_name=None, collection_name=None):
+    def __init__(self, host, port=27017, db_name=None, collection_name=None, user_name=None, password=None):
         """
         :param host:
         :param port:
@@ -24,10 +24,15 @@ class Mongo(metaclass=Singleton):
         self.port = int(port)
         self.db = db_name
         self.collection_name = collection_name
-        self.connect = MongoClient(self.host, self.port)
+        if user_name:
+            self.connect = MongoClient(host, port)
+            db_auth = self.connect.admin
+            db_auth.authenticate(user_name, password)
+        else:
+            self.connect = MongoClient(host, port)
 
     def get_collection_object(self):
-        warnings.warn('这个方法我早晚给它删了的,你们都别用,请直接调用类属性',
+        warnings.warn('这个方法我早晚给它删了的,你们都别用,请直接调用connect类属性',
                       DeprecationWarning, stacklevel=2)
         client = MongoClient(self.host, self.port)
         db = client[self.db]
@@ -35,11 +40,12 @@ class Mongo(metaclass=Singleton):
         return collection
 
     def get_connection(self):
-        warnings.warn('这个方法我早晚给它删了的,这个虽然是单例，你们都别用,请直接调用类属性',
+        warnings.warn('这个方法我早晚给它删了的,这个虽然是单例，你们都别用,请直接调用connect类属性',
                       DeprecationWarning, stacklevel=2)
         return self.connect
 
 
 if __name__ == '__main__':
-    m = Mongo(host='192.168.0.235', port=27017, db_name='a', collection_name='b')
-    m.get_connection()
+    m = Mongo(host='114.80.150.196', port=27777, user_name='fangjia', password='fangjia123456')
+    collection_ = m.connect['auction']['auction_new']
+    print(collection_.find_one())
