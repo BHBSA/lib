@@ -13,12 +13,18 @@ def standard_city(city_name):
     :param city_name: 城市名称
     :return: 城市名称
     """
+    city_name_in_fangjia_list = []
+
     for city_name_in_fangjia in city_dict.keys():
         for nick_name in city_dict[city_name_in_fangjia]:
             if nick_name in city_name:
-                return True, city_name_in_fangjia
-    log.error("城市无法标准化：{}".format(city_name))
-    return False, city_name
+                city_name_in_fangjia_list.append(city_name_in_fangjia)
+
+    if len(city_name_in_fangjia_list):
+        return True, max(city_name_in_fangjia_list, key=lambda x: len(x))
+    else:
+        log.error("城市无法标准化：{}".format(city_name))
+        return False, city_name
 
 
 def standard_block(city_name, region_name):
@@ -37,9 +43,3 @@ def standard_block(city_name, region_name):
     else:
         log.error("城市无法标准化：{},无法格式话区域".format(city_name))
         return False, city_name
-
-# if __name__ == '__main__':
-#     a, b = standard_city('  宁波  ')
-#     print(b)
-#     a, b = standard_block('武汉   江岸区', '    武汉   江岸区')
-#     print(b)
